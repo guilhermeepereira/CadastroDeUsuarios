@@ -2,34 +2,35 @@ package com.example.CadastroDeNinjas.Ninjas;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/ninjas")
 public class NinjaController {
     @GetMapping("/welcome")
     public String welcome(){
-        return "teste - welcome updated";
+        return "Bem vindo a Ninjas";
     }
 
-    @PostMapping("/adicionar")
-    public String add(){
-        return "Adicionar Ninja";
+    @PostMapping("/criar")
+    public String criar(){
+        return "Ninja criado!";
     }
 
     @GetMapping("/listar")
     public String listar(){
-        return "lista de ninjas";
+        return "Ninjas listados!";
     }
 
     @GetMapping("/listar_por_id")
     public String listarID(){
-        return "Lista do ninja com ID";
+        return "Ninja por ID listado!";
     }
 
     @PutMapping("/atualizar")
     public String atualizar(){
-        return "Atualizar infos do Ninja";
+        return "Ninja atualizado!";
     }
 
     @DeleteMapping("/deletar")
-    public String delete(){
-        return "Deletar Ninja";
+    public String deletar(){
+        return "Ninja Deletado!";
     }
 }
