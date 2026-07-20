@@ -10,9 +10,11 @@ import java.util.Optional;
 public class NinjaService {
 
     private NinjaRepository ninjaRepository;
+    private NinjaMapper ninjaMapper;
 
-    public NinjaService(NinjaRepository ninjaRepository) {
+    public NinjaService(NinjaRepository ninjaRepository, NinjaMapper ninjaMapper) {
         this.ninjaRepository = ninjaRepository;
+        this.ninjaMapper = ninjaMapper;
     }
 
     public List<NinjaModel> listarNinjas(){
@@ -24,19 +26,22 @@ public class NinjaService {
         return ninjaPorId.orElse(null);
     }
 
-    public NinjaModel criarNinja(NinjaModel novoNinja){
-        NinjaModel ninjaCriado = ninjaRepository.save(novoNinja);
-        return novoNinja;
+    public NinjaDTO criarNinja(NinjaDTO novoNinja){
+        NinjaModel ninjaModel = ninjaMapper.map(novoNinja);
+        ninjaModel = ninjaRepository.save(ninjaModel);
+        return ninjaMapper.map(ninjaModel);
     }
 
     public void deletarNinja(Long id) {
         ninjaRepository.deleteById(id);
     }
 
-    public NinjaModel atualizarNinja(Long id, NinjaModel novoNinja){
+    public NinjaDTO atualizarNinja(Long id, NinjaDTO novoNinja){
+        NinjaModel ninjaModel = ninjaMapper.map(novoNinja);
         if (ninjaRepository.existsById(id)){
-            novoNinja.setId(id);
-            return ninjaRepository.save(novoNinja);
+            ninjaModel.setId(id);
+            ninjaModel = ninjaRepository.save(ninjaModel);
+            return ninjaMapper.map(ninjaModel);
         }
         return null;
     }
