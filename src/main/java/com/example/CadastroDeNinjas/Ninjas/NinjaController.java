@@ -19,7 +19,7 @@ public class NinjaController {
     }
 
     @PostMapping("/criar")
-    public NinjaModel criar(@RequestBody NinjaModel novoNinja){
+    public NinjaDTO criar(@RequestBody NinjaDTO novoNinja){
         return ninjaService.criarNinja(novoNinja);
     }
 
@@ -34,7 +34,7 @@ public class NinjaController {
     }
 
     @PutMapping("/atualizar/{id}")
-    public NinjaModel atualizar(@PathVariable Long id, @RequestBody NinjaModel novoNinja){
+    public NinjaDTO atualizar(@PathVariable Long id, @RequestBody NinjaDTO novoNinja){
         return ninjaService.atualizarNinja(id, novoNinja);
     }
 
